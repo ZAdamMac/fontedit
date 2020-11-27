@@ -69,7 +69,7 @@ def export(font, filename):
             # is a printable ascii character
             if (i >= 32) and (i < 127):
                 comm = "  /* %c */" % i
-                else:  # else, print the char value.
+            else:  # else, print the char value.
                 comm = " /* %x */" % i
             # write the end of the string and newline
             fw.write("\",%s\n" % comm)
