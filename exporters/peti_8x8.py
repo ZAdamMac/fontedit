@@ -64,13 +64,14 @@ def export(font, filename):
                 for k in range(font.cols):
                     b = (b << 1) | c[j][k]
                 # write the byte formatted as an escaped hex value for C
+                b = reverse_bits(b, 8)  # Needed to suit endianness requirements
                 fw.write("\\x%02X" % b)
             # add a handy comment at the end of the row if the char
             # is a printable ascii character
             if (i >= 32) and (i < 127):
                 comm = "  /* %c */" % i
             else:  # else, print the char value.
-                comm = " /* %x */" % i
+                comm = " /* 0x%x */" % i
             # write the end of the string and newline
             fw.write("\",%s\n" % comm)
 
@@ -80,6 +81,14 @@ def export(font, filename):
     # return zero to indicate that we were successful
     return 0
 
+
+def reverse_bits(n, no_of_bits):
+    result = 0
+    for i in range(no_of_bits):
+        result <<= 1
+        result |= n & 1
+        n >>= 1
+    return result
 
 # the exporters dict is where the program finds the importer from
 # needs name, desc and func parts.
