@@ -54,7 +54,7 @@ def export(font, filename):
             if (i >= 32) and (i < 127):  # For convenience we can use string literals.
                 key = "%c" % i
             else:  # else, get the unicode string literal
-                key = "\\u%04x" % i
+                key = "\\x%02x" % i
             # fetch the array of pixels
             value_raw = font.get_character(i)
             output_pixels = []
