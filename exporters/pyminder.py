@@ -48,13 +48,10 @@ def export(font, filename):
     with open(filename, "w") as fw:
 
 
-        # itterate over all characters
+        # iterate over all characters
         output_font = {}
         for i in range(font.chars):
-            if (i >= 32) and (i < 127):  # For convenience we can use string literals.
-                key = "%c" % i
-            else:  # else, get the unicode string literal
-                key = "\\x%02x" % i
+            key = "%c" % i
             # fetch the array of pixels
             value_raw = font.get_character(i)
             output_pixels = []
@@ -79,7 +76,7 @@ def export(font, filename):
 # the exporters dict is where the program finds the importer from
 # needs name, desc and func parts.
 exporters = {"name": "Pyminder Font Exporter",
-             "desc": "Matches the 8x12 Font for Pyminder",
+             "desc": "Matches the 8x8 Font for Pyminder",
              "func": export}
 
 
